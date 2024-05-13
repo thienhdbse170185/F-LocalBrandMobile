@@ -11,8 +11,6 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { Colors } from "@/constants/Colors";
 import TextInputIcon from "@/components/form/TextInputIcon";
-import { SvgUri } from "react-native-svg";
-import { router } from "expo-router";
 
 type FormData = {
   username: string;
@@ -213,6 +211,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: "100%",
+    borderRadius: 48 / 2,
   },
 });
