@@ -11,9 +11,14 @@ export const Colors = {
     text: '#11181C',
     background: '#fff',
     tint: tintColorLight,
-    icon: '#687076',
+    icon: '#626262',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    borderInput: '#A8A8A9',
+    backgroundInput: '#ebeaea',
+    primary: "#F83758",
+    hint: "#575757",
+    backgroundOutlined: "#FCF3F6"
   },
   dark: {
     text: '#ECEDEE',
