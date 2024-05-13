@@ -1,0 +1,42 @@
+export const accounts = [
+  {
+    id: 1,
+    username: "john",
+    password: "123456",
+    fullname: "John Doe",
+    gender: "male",
+    location: "New York",
+  },
+  {
+    id: 2,
+    username: "jane",
+    password: "abcdef",
+    fullname: "Jane Doe",
+    gender: "female",
+    location: "Los Angeles",
+  },
+  {
+    id: 3,
+    username: "mike",
+    password: "qwerty",
+    fullname: "Mike Smith",
+    gender: "male",
+    location: "Chicago",
+  },
+  {
+    id: 4,
+    username: "sarah",
+    password: "helloworld",
+    fullname: "Sarah Brown",
+    gender: "female",
+    location: "San Francisco",
+  },
+  {
+    id: 5,
+    username: "alex",
+    password: "111111",
+    fullname: "Alex Johnson",
+    gender: "male",
+    location: "Austin",
+  },
+];
