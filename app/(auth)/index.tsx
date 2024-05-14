@@ -89,8 +89,8 @@ export default function LoginScreen() {
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
-                borderColorUsername={borderColorUsername}
-                setBorderColorUsername={setBorderColorUsername}
+                borderColorUsername={borderColorPassword}
+                setBorderColorUsername={setBorderColorPassword}
                 hasEye={true}
                 isSecureTextEntry={true}
                 nameIcon="lock-closed"
