@@ -9,8 +9,8 @@ type Props = {
   onChange: (text: string) => void;
   onBlur: () => void;
   value: string | null;
-  borderColorUsername: string;
-  setBorderColorUsername: (color: string) => void;
+  borderColor: string;
+  setBorderColor: (color: string) => void;
   nameIcon: ComponentProps<typeof Ionicons>["name"];
   hasEye?: boolean;
   isSecureTextEntry?: boolean;
@@ -32,8 +32,8 @@ export default function TextInputIcon(props: Props): JSX.Element {
     onChange,
     onBlur,
     value,
-    borderColorUsername,
-    setBorderColorUsername,
+    borderColor,
+    setBorderColor,
     nameIcon,
     hasEye,
     isSecureTextEntry,
@@ -42,10 +42,10 @@ export default function TextInputIcon(props: Props): JSX.Element {
   const [isVisible, setVisible] = useState(isSecureTextEntry);
   const handleBlur = () => {
     onBlur();
-    setBorderColorUsername("gray");
+    setBorderColor("gray");
   };
 
-  const handleFocus = () => setBorderColorUsername("black");
+  const handleFocus = () => setBorderColor("black");
 
   const handleChangeText = (text: string) => {
     if (onChange) {
@@ -68,7 +68,7 @@ export default function TextInputIcon(props: Props): JSX.Element {
         onFocus={handleFocus}
         secureTextEntry={isVisible}
         value={value ?? ""}
-        style={[styles.input, { borderColor: borderColorUsername }]}
+        style={[styles.input, { borderColor: borderColor }]}
         autoCapitalize="none"
         autoComplete="off"
       />
