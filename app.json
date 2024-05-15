@@ -8,7 +8,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splash_image.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -31,6 +31,8 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
-  }
+    },
+    "sdkVersion": "51.0.0"
+  },
+  "name": "f-localbrandmobile"
 }
