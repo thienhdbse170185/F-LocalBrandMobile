@@ -9,6 +9,7 @@ export default function LoginLayout() {
     >
       <Stack.Screen name="index" />
       <Stack.Screen name="register/index" />
+      <Stack.Screen name="forgot-pw/index" />
     </Stack>
   );
 }

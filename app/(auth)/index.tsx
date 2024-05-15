@@ -25,7 +25,7 @@ type FormData = {
  *
  * @returns {JSX.Element} Login screen component.
  */
-export default function LoginScreen() {
+export default function LoginScreen(): JSX.Element {
   // react-hook-form Controller hook for handling form data.
   const {
     control,
@@ -153,14 +153,12 @@ export default function LoginScreen() {
               textAlign: "right",
               fontFamily: "MontserratRegular",
               fontSize: 16,
-              color: Colors.light.hint,
+              color: Colors.light.primary,
               marginTop: 10,
-              textDecorationLine: "underline",
             }}
             // onPress event handler.
             onPress={() => {
-              // router.navigate("/forgot-password");
-              alert("Forgot Password coming soon...");
+              router.navigate("/forgot-pw");
             }}
           >
             Forgot Password?
