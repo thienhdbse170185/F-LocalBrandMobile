@@ -86,7 +86,7 @@ export default function TextInputIcon(props: Props): JSX.Element {
 
 const styles = StyleSheet.create({
   input: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "MontserratMedium",
     flex: 1,
   },
