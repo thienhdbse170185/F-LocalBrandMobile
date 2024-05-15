@@ -24,7 +24,7 @@ type FormData = {
  *
  * @returns {JSX.Element} Register screen component.
  */
-export default function RegisterScreen() {
+export default function RegisterScreen(): JSX.Element {
   // react-hook-form Controller hook for handling form data.
   const {
     control,
