@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   ActivityIndicator,
+  Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
@@ -41,6 +42,7 @@ export default function ForgotPwScreen() {
    */
   const onSubmit = handleSubmit(
     ({ email }) => {
+      Keyboard.dismiss();
       if (email) {
         setIsLoading(true);
         setTimeout(() => {

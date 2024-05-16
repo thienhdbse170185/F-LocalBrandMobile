@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Image,
+  Keyboard,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -55,6 +56,7 @@ export default function RegisterScreen(): JSX.Element {
    */
   const onSubmit = handleSubmit(
     ({ username, password }) => {
+      Keyboard.dismiss();
       if (username !== null && password !== null) {
         alert(username + " " + password);
       } else {
