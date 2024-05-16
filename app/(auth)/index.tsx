@@ -58,7 +58,7 @@ export default function LoginScreen(): JSX.Element {
       if (token) {
         setIsLoading(true);
         setTimeout(() => {
-          router.navigate("(tabs)");
+          router.replace("(tabs)");
         }, 3000);
       } else {
         setIsLoading(false);
@@ -73,15 +73,15 @@ export default function LoginScreen(): JSX.Element {
    * @param {FormData} data Form data.
    */
   const onSubmit = handleSubmit(
-    ({ username, password }) => {
+    async ({ username, password }) => {
       Keyboard.dismiss();
       if (username && password) {
         setIsLoading(true);
-        setTimeout(() => {
-          setIsLoading(false);
-          // alert(username + " " + password);
-          router.navigate("(tabs)");
-        }, 2000);
+        await new Promise(() =>
+          setTimeout(() => {
+            router.replace("(tabs)");
+          }, 2000)
+        );
       }
     },
     (errors) => {
