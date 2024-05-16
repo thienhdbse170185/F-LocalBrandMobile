@@ -61,7 +61,8 @@ export default function LoginScreen(): JSX.Element {
         setIsLoading(true);
         setTimeout(() => {
           setIsLoading(false);
-          alert(username + " " + password);
+          // alert(username + " " + password);
+          router.navigate("(tabs)");
         }, 2000);
       } else {
         console.error("Null username or password");
