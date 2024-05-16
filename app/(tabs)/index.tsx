@@ -13,7 +13,7 @@ export default function Index() {
       <Pressable
         onPress={() => {
           AsyncStorage.removeItem("token");
-          router.navigate("(auth)");
+          router.replace("(auth)");
         }}
         style={{
           marginTop: 30,
