@@ -1,38 +1,41 @@
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { Tabs, router } from "expo-router";
+import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-const CustomTabBarButton: React.FC<{
-  children: React.ReactNode;
-  onPress: () => void;
-}> = ({ children, onPress }) => (
-  <TouchableOpacity
-    style={{
-      top: -10,
-      justifyContent: "center",
-      alignItems: "center",
-      ...styles.shadow,
-    }}
-    activeOpacity={0.8}
-    onPress={onPress}
-  >
-    <View
+export default function TabLayout() {
+  const [isTouchCart, setIsTouchCart] = useState(false);
+
+  const CustomTabBarButton: React.FC<{
+    children: React.ReactNode;
+    onPress: () => void;
+  }> = ({ children, onPress }) => (
+    <TouchableOpacity
       style={{
-        width: 64,
-        height: 64,
-        borderRadius: 35,
-        backgroundColor: "white",
+        top: -15,
         justifyContent: "center",
         alignItems: "center",
+        ...styles.shadow,
       }}
+      activeOpacity={0.8}
+      onPress={onPress}
     >
-      {children}
-    </View>
-  </TouchableOpacity>
-);
+      <View
+        style={{
+          width: 64,
+          height: 64,
+          borderRadius: 35,
+          backgroundColor: isTouchCart ? Colors.light.primary : "white",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {children}
+      </View>
+    </TouchableOpacity>
+  );
 
-export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
@@ -42,12 +45,12 @@ export default function TabLayout() {
         tabBarStyle: {
           position: "absolute",
           backgroundColor: "#ffffff",
-          height: 60,
+          height: 62,
           ...styles.shadow,
         },
         tabBarLabelStyle: {
           fontFamily: "MontserratSemiBold",
-          fontSize: 12,
+          fontSize: 14,
         },
       }}
     >
@@ -62,6 +65,11 @@ export default function TabLayout() {
             />
           ),
         }}
+        listeners={{
+          tabPress: () => {
+            setIsTouchCart(false);
+          },
+        }}
       />
       <Tabs.Screen
         name="wishlist"
@@ -74,6 +82,11 @@ export default function TabLayout() {
             />
           ),
         }}
+        listeners={{
+          tabPress: () => {
+            setIsTouchCart(false);
+          },
+        }}
       />
       <Tabs.Screen
         name="cart"
@@ -85,8 +98,16 @@ export default function TabLayout() {
             />
           ),
           tabBarButton: () => (
-            <CustomTabBarButton onPress={() => router.navigate("cart")}>
-              <TabBarIcon name="cart-outline" color="#000" />
+            <CustomTabBarButton
+              onPress={() => {
+                setIsTouchCart(true);
+                router.navigate("cart");
+              }}
+            >
+              <TabBarIcon
+                name="cart-outline"
+                color={isTouchCart ? "#fff" : "#000"}
+              />
             </CustomTabBarButton>
           ),
           title: "",
@@ -103,6 +124,11 @@ export default function TabLayout() {
             />
           ),
         }}
+        listeners={{
+          tabPress: () => {
+            setIsTouchCart(false);
+          },
+        }}
       />
       <Tabs.Screen
         name="setting"
@@ -114,6 +140,11 @@ export default function TabLayout() {
               color={color}
             />
           ),
+        }}
+        listeners={{
+          tabPress: () => {
+            setIsTouchCart(false);
+          },
         }}
       />
     </Tabs>

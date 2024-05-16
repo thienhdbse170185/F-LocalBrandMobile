@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -15,6 +15,7 @@ import { Colors } from "@/constants/Colors";
 import TextInputIcon from "@/components/form/TextInputIcon";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type FormData = {
   username: string;
@@ -48,6 +49,21 @@ export default function LoginScreen(): JSX.Element {
     useState<string>("gray");
   // State for handling loading state.
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const preLoad = async () => {
+      const token = await AsyncStorage.getItem("token");
+      if (token) {
+        setIsLoading(true);
+        setTimeout(() => {
+          router.navigate("(tabs)");
+        }, 3000);
+      } else {
+        setIsLoading(false);
+      }
+    };
+    preLoad();
+  }, []);
 
   /**
    * Handle form submission.
@@ -83,7 +99,11 @@ export default function LoginScreen(): JSX.Element {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Welcome {"\n"}Back!</Text>
+      <View style={{ height: 105 }}>
+        <Text style={styles.title}>
+          {isLoading ? `Logging in...` : `Welcome ${"\n"}Back!`}
+        </Text>
+      </View>
       <KeyboardAvoidingView style={styles.form}>
         <View style={styles.inputLayout}>
           <Controller
