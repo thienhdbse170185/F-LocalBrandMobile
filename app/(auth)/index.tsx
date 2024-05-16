@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   ActivityIndicator,
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
@@ -55,6 +56,7 @@ export default function LoginScreen(): JSX.Element {
    */
   const onSubmit = handleSubmit(
     ({ username, password }) => {
+      Keyboard.dismiss();
       if (username && password) {
         setIsLoading(true);
         setTimeout(() => {
