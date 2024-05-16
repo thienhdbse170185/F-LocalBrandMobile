@@ -8,6 +8,7 @@ type Props = {
   placeholder: string;
   onChange: (text: string) => void;
   onBlur: () => void;
+  onFocus: () => void;
   value: string | null;
   borderColor: string;
   setBorderColor: (color: string) => void;
@@ -28,6 +29,7 @@ export default function TextInputIcon(props: Props): JSX.Element {
     placeholder, // Placeholder text for the input
     onChange, // Function called when input text changes
     onBlur, // Function called when input loses focus
+    onFocus,
     value, // Value of the input
     borderColor, // Border color of the input
     setBorderColor, // Function to set border color
@@ -50,25 +52,6 @@ export default function TextInputIcon(props: Props): JSX.Element {
     }
   };
 
-  /**
-   * Handle input focus event
-   */
-  const handleFocus = () => {
-    if (setBorderColor) {
-      setBorderColor("black");
-    }
-  };
-
-  /**
-   * Handle input text change
-   * @param text - New input text
-   */
-  const handleChangeText = (text: string) => {
-    if (onChange) {
-      onChange(text);
-    }
-  };
-
   return (
     <View style={[styles.inputDiv, { borderColor: borderColor }]}>
       <InputIcon
@@ -80,8 +63,8 @@ export default function TextInputIcon(props: Props): JSX.Element {
         placeholder={placeholder}
         placeholderTextColor={"gray"}
         onBlur={handleBlur}
-        onChangeText={handleChangeText}
-        onFocus={handleFocus}
+        onFocus={onFocus}
+        onChangeText={onChange}
         secureTextEntry={isVisible}
         value={value ?? ""}
         style={styles.input}
@@ -107,8 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputDiv: {
-    borderWidth: 1,
-    borderRadius: 10,
+    borderWidth: 1.5,
+    borderRadius: 8,
     paddingVertical: 5,
     paddingHorizontal: 16,
     height: 60,
