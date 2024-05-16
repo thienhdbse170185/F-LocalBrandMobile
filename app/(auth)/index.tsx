@@ -33,6 +33,8 @@ export default function LoginScreen(): JSX.Element {
     control,
     handleSubmit,
     formState: { errors },
+    setError,
+    clearErrors,
   } = useForm<FormData>({
     // Set default form values.
     defaultValues: {
@@ -80,13 +82,10 @@ export default function LoginScreen(): JSX.Element {
           // alert(username + " " + password);
           router.navigate("(tabs)");
         }, 2000);
-      } else {
-        console.error("Null username or password");
       }
     },
     (errors) => {
       if (errors) {
-        console.error("Form submission errors:", errors);
         if (errors.username) {
           setBorderColorUsername("red");
         }
@@ -114,9 +113,16 @@ export default function LoginScreen(): JSX.Element {
                 // Input placeholder text.
                 placeholder="Username"
                 // onChange event handler.
-                onChange={onChange}
+                onChange={(text) => {
+                  onChange(text);
+                  if (text === "") clearErrors("username");
+                }}
                 // onBlur event handler.
                 onBlur={onBlur}
+                onFocus={() => {
+                  clearErrors("username");
+                  setBorderColorUsername("black");
+                }}
                 // Input value.
                 value={value}
                 // Border color of input.
@@ -129,12 +135,13 @@ export default function LoginScreen(): JSX.Element {
             )}
             // Name of the input.
             name="username"
-            // Validation rules for the input.
             rules={{ required: true }}
           />
           {/* Display error message if there is an error. */}
           {errors.username && (
-            <Text style={styles.error}>Username is required.</Text>
+            <Text style={styles.error}>
+              {errors.username.message || "Please fill in the blank"}
+            </Text>
           )}
         </View>
         <View style={styles.inputLayout}>
@@ -148,6 +155,10 @@ export default function LoginScreen(): JSX.Element {
                 onChange={onChange}
                 // onBlur event handler.
                 onBlur={onBlur}
+                onFocus={() => {
+                  clearErrors("password");
+                  setBorderColorPassword("black");
+                }}
                 // Input value.
                 value={value}
                 // Border color of input.
@@ -164,12 +175,13 @@ export default function LoginScreen(): JSX.Element {
             )}
             // Name of the input.
             name="password"
-            // Validation rules for the input.
             rules={{ required: true }}
           />
           {/* Display error message if there is an error. */}
           {errors.password && (
-            <Text style={styles.error}>Password is required.</Text>
+            <Text style={styles.error}>
+              {errors.password.message || "Please fill in the blank"}
+            </Text>
           )}
           <Text
             style={{
@@ -178,6 +190,9 @@ export default function LoginScreen(): JSX.Element {
               fontSize: 16,
               color: Colors.light.primary,
               marginTop: 10,
+              position: "absolute",
+              right: 0,
+              bottom: 0,
             }}
             // onPress event handler.
             onPress={() => {
@@ -280,9 +295,10 @@ const styles = StyleSheet.create({
   },
   error: {
     color: "red",
+    fontFamily: "MontserratMedium",
   },
   inputLayout: {
-    height: 90,
+    height: 95,
   },
   socialButton: {
     backgroundColor: Colors.light.backgroundOutlined,
