@@ -45,6 +45,10 @@ export default function TabLayout() {
           height: 60,
           ...styles.shadow,
         },
+        tabBarLabelStyle: {
+          fontFamily: "MontserratSemiBold",
+          fontSize: 12,
+        },
       }}
     >
       <Tabs.Screen
