@@ -16,37 +16,53 @@ type Props = {
   isSecureTextEntry?: boolean;
 };
 
+// Refactored TextInputIcon component with bug fixes
+
 /**
- * Strongly typed TextInputIcon component.
- * @param onChange The function to call when the text is changed.
- * @param onBlur The function to call when the input is blurred.
- * @param value The current value of the input.
- * @param borderColorUsername The current border color of the input.
- * @param setBorderColorUsername The function to call to set the border color.
- * @param nameIcon The name of the icon to display.
- * @returns The TextInputIcon component.
+ * TextInputIcon component with icon and text input
+ * @param props - Component props
+ * @returns JSX.Element
  */
 export default function TextInputIcon(props: Props): JSX.Element {
   const {
-    placeholder,
-    onChange,
-    onBlur,
-    value,
-    borderColor,
-    setBorderColor,
-    nameIcon,
-    hasEye,
-    isSecureTextEntry,
+    placeholder, // Placeholder text for the input
+    onChange, // Function called when input text changes
+    onBlur, // Function called when input loses focus
+    value, // Value of the input
+    borderColor, // Border color of the input
+    setBorderColor, // Function to set border color
+    nameIcon, // Name of the icon to display
+    hasEye, // Flag to show eye icon
+    isSecureTextEntry, // Flag for secure text entry
   } = props;
 
-  const [isVisible, setVisible] = useState(isSecureTextEntry);
+  const [isVisible, setVisible] = useState(isSecureTextEntry); // State for text visibility
+
+  /**
+   * Handle input blur event
+   */
   const handleBlur = () => {
-    onBlur();
-    setBorderColor("gray");
+    if (onBlur) {
+      onBlur();
+    }
+    if (setBorderColor) {
+      setBorderColor("gray");
+    }
   };
 
-  const handleFocus = () => setBorderColor("black");
+  /**
+   * Handle input focus event
+   */
+  const handleFocus = () => {
+    if (setBorderColor) {
+      setBorderColor("black");
+    }
+  };
 
+  /**
+   * Handle input text change
+   * @param text - New input text
+   */
   const handleChangeText = (text: string) => {
     if (onChange) {
       onChange(text);
@@ -54,7 +70,7 @@ export default function TextInputIcon(props: Props): JSX.Element {
   };
 
   return (
-    <View style={styles.inputDiv}>
+    <View style={[styles.inputDiv, { borderColor: borderColor }]}>
       <InputIcon
         name={nameIcon}
         color={Colors.light.icon}
@@ -68,7 +84,7 @@ export default function TextInputIcon(props: Props): JSX.Element {
         onFocus={handleFocus}
         secureTextEntry={isVisible}
         value={value ?? ""}
-        style={[styles.input, { borderColor: borderColor }]}
+        style={styles.input}
         autoCapitalize="none"
         autoComplete="off"
       />

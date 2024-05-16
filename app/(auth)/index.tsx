@@ -165,7 +165,7 @@ export default function LoginScreen(): JSX.Element {
             // Name of the input.
             name="password"
             // Validation rules for the input.
-            rules={{ maxLength: 100 }}
+            rules={{ required: true }}
           />
           {/* Display error message if there is an error. */}
           {errors.password && (
