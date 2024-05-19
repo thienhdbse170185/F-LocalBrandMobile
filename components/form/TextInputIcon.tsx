@@ -35,7 +35,7 @@ export default function TextInputIcon(props: Props): JSX.Element {
     setBorderColor, // Function to set border color
     nameIcon, // Name of the icon to display
     hasEye, // Flag to show eye icon
-    isSecureTextEntry, // Flag for secure text entry
+    isSecureTextEntry // Flag for secure text entry
   } = props;
 
   const [isVisible, setVisible] = useState(isSecureTextEntry); // State for text visibility
@@ -88,17 +88,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "MontserratMedium",
     flex: 1,
+    height: 60
   },
   inputDiv: {
     borderWidth: 1.5,
     borderRadius: 8,
-    paddingVertical: 5,
     paddingHorizontal: 16,
-    height: 60,
     backgroundColor: Colors.light.backgroundInput,
     borderColor: Colors.light.borderInput,
     display: "flex",
     alignItems: "center",
-    flexDirection: "row",
-  },
+    flexDirection: "row"
+  }
 });
