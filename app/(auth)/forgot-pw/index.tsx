@@ -9,7 +9,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,11 +23,13 @@ export default function ForgotPwScreen() {
     control,
     handleSubmit,
     formState: { errors },
+    setError,
+    clearErrors
   } = useForm<FormData>({
     // Set default form values.
     defaultValues: {
-      email: "",
-    },
+      email: ""
+    }
   });
 
   // State for handling border color of username input.
@@ -49,14 +51,12 @@ export default function ForgotPwScreen() {
           setIsLoading(false);
           alert(email);
         }, 2000);
-      } else {
-        console.error("Null email");
       }
     },
     (errors) => {
       if (errors) {
-        console.error("Form submission errors:", errors);
         if (errors.email) {
+          setError("email", { message: "Please enter a valid email", type: "required" }, { shouldFocus: true });
           setBorderColorEmail("red");
         }
       }
@@ -76,9 +76,19 @@ export default function ForgotPwScreen() {
                 // Input placeholder text.
                 placeholder="Enter your email address"
                 // onChange event handler.
-                onChange={onChange}
+                onChange={(text) => {
+                  onChange(text);
+                  if (text === "") {
+                    clearErrors("email");
+                    setBorderColorEmail("black");
+                  }
+                }}
                 // onBlur event handler.
                 onBlur={onBlur}
+                onFocus={() => {
+                  clearErrors("email");
+                  setBorderColorEmail("black");
+                }}
                 // Input value.
                 value={value}
                 // Border color of input.
@@ -86,7 +96,7 @@ export default function ForgotPwScreen() {
                 // Set border color.
                 setBorderColor={setBorderColorEmail}
                 // Name of icon to be displayed on the left side of the input.
-                nameIcon="person"
+                nameIcon="mail"
               />
             )}
             // Name of the input.
@@ -95,14 +105,19 @@ export default function ForgotPwScreen() {
             rules={{ required: true }}
           />
           {/* Display error message if there is an error. */}
-          {errors.email && <Text style={styles.error}>Email is required.</Text>}
+          {errors.email && (
+            <Text style={styles.error}>
+              {/*{errors.email.message || "Please fill in the blank"}*/}
+              {errors.email.message}
+            </Text>
+          )}
         </View>
         <View>
           <Text
             style={{
               fontFamily: "MontserratRegular",
               fontSize: 14,
-              color: Colors.light.hint,
+              color: Colors.light.hint
             }}
           >
             <Text style={{ color: Colors.light.primary }}>*</Text> We will send
@@ -130,29 +145,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 30
   },
   title: { fontFamily: "MontserratBold", fontSize: 42 },
   form: {
-    marginVertical: 38,
+    marginVertical: 38
   },
   button: {
     backgroundColor: Colors.light.primary,
     height: 60,
     borderRadius: 6,
     justifyContent: "center",
-    marginTop: 48,
+    marginTop: 48
   },
   buttonText: {
     fontSize: 22,
     textAlign: "center",
     color: "white",
-    fontFamily: "MontserratSemiBold",
+    fontFamily: "MontserratSemiBold"
   },
   error: {
     color: "red",
+    fontFamily: "MontserratMedium"
   },
   inputLayout: {
-    height: 90,
-  },
+    height: 95
+  }
 });
